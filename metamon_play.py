@@ -72,7 +72,7 @@ def picker_battler(monsters_list):
 def pick_battle_level(level=1):
     # pick highest league for given level
     if 21 <= level <= 40:
-        return 2
+        return 1
     if 41 <= level <= 60:
         return 3
     return 1
@@ -203,7 +203,7 @@ class MetamonPlayer:
         data = []
         page = 1
         while True:
-            payload = {"address": self.address, "page": page, "pageSize": 60}
+            payload = {"address": self.address, "page": page, "pageSize": 200}
             headers = {
                 "accessToken": self.token,
             }
@@ -218,7 +218,7 @@ class MetamonPlayer:
 
     def list_monsters(self):
         """ Obtain list of metamons on the wallet (deprecated)"""
-        payload = {"address": self.address, "page": 1, "pageSize": 60, "payType": -6}
+        payload = {"address": self.address, "page": 1, "pageSize": 200, "payType": -6}
         headers = {"accessToken": self.token}
         response = post_formdata(payload, LIST_MONSTER_URL, headers)
         monsters = response.get("data", {}).get("data", {})
